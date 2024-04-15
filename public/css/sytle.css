@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:monospace ;
+  font-size: 18px;
+}
+
+body {
+  background: #222
+    url(https://wallpapers-clan.com/wp-content/uploads/2024/02/pokemon-pikachu-drawn-desktop-wallpaper-preview.jpg)
+    no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.btn-1:hover {
+  background-color: black;
+  transition: all 0.6s ease;
+  color: white;
+}
+
+a {
+  text-decoration: none; 
+  color: white;
+}
+
+
+main {
+  margin: auto;
+  width: 50%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap !important;
+}
+
+.card {
+  background-color: #fff;
+  margin: 50px 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 380px;
+  height: 380px;
+}
+
+.banner {
+  height: 150px;
+  background: #000 url(/public/img/poke.png) no-repeat center center;
+  background-size: cover;
+}
+
+.content {
+  padding: 30px;
+}
+
+.texts {
+  transform: translateY(-50%);
+}
+
+.img-profile {
+  width: 30%;
+  margin: auto;
+  overflow: hidden;
+
+  transform: translateY(-85%);
+}
+
+.img-profile img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.name {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.flex-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.species {
+  text-align: center;
+  margin: 20px 10px;
+}
+
+/* button.botaoNext {
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  left: 47%;
+  position: relative;
+  background-color: red;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-radius: 10px;
+  border: none;
+  top: 25px;
+}
+button.botaoNext:hover {
+  left: 48%;
+  transition: all 0.5s ease;
+  cursor: pointer;
+
+} */
+
+.home {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: red;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 17px;
+  padding: 10px;
+  width: 180px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  top: 200px;
+  margin-left: 40px;
+  transform: translateY(100%);
+ }
+ 
+ .home span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+ }
+ 
+ .home:hover span {
+  padding-left: 15px;
+ }
+ .home span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -15px;
+  transition: 0.5s;
+  transform: scaleX(-1); /* Inverter horizontalmente */
+}
+
+.home:hover span:after {
+  opacity: 1;
+  left: 0; /* Mudar de 'right' para 'left' */
+}
+
+
+.button1, .button2 {
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: red;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin: auto;
+  margin-top: 20px;
+  margin-left: 50px;
+  color: white;
+}
+
+.button1:hover, .button2:hover {
+  background: red;
+}
+
+.button1 > svg, .button2 > svg {
+  width: 34px;
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.button1:hover > svg {
+  transform: translateX(5px);
+}
+
+.button1:active, .button2:active {
+  transform: scale(0.95);
+}
+
+.button2 > svg {
+  margin-right: 10px; /* Alterando a margem para a esquerda */
+}
+
+.button2:hover > svg {
+  transform: translateX(-5px); /* Movendo para a esquerda */
+}
+
+.main {
+  display: flex;
+  width: 200px;
+  margin-left: 40%;
+}
+
+
