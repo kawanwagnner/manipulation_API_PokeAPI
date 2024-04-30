@@ -1,95 +1,38 @@
 const main = document.querySelector(".container");
-
-async function getPokemon() {
-  // Fazendo uma requisição para a PokeAPI para obter dados de Pokémon
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20");
-
-  // Convertendo a resposta para JSON
-  const data = await response.json();
-
-  // Chamando a função para criar os cards
-  createPokemonCards(data.results);
-}
-
-function createPokemonCards(pokemonArray) {
-  // Iterando sobre o array de Pokémon
-  pokemonArray.forEach(async (pokemon) => {
-    // Fazendo uma nova requisição para obter dados detalhados do Pokémon
-    const response = await fetch(pokemon.url);
-    const pokemonData = await response.json();
-
-    // Obtendo a URL da imagem animada do Pokémon
-    const animatedImageUrl =
-      pokemonData.sprites.versions["generation-v"]["black-white"].animated
-        .front_default;
-
-    // Criando o card HTML para o Pokémon
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="banner"></div>
-      <div class="content">
-        <div class="img-profile">
-          <img class="img" src="${animatedImageUrl}" alt="${
-      pokemonData.name
-    }" />
-        </div>
-        <div class="texts">
-          <h3 class="name">${pokemonData.name}</h3>
-          <h5 class="species">Tipo: ${pokemonData.types
-            .map((type) => type.type.name)
-            .join(", ")}</h5>
-          <div class="flex-status">
-            <h4 class="life">Altura: ${pokemonData.height}</h4>
-            <h4 class="gener">Peso: ${pokemonData.weight}</h4>
-          </div>
-        </div>
-      </div>
-    `;
-    // Adicionando o card ao elemento principal
-    main.appendChild(card);
-  });
-}
-
-
-// Chamando a função principal para buscar e exibir os Pokémon
-getPokemon();
-
-const main2 = document.querySelector(".container");
-const backButton = document.querySelector(".button2:nth-child(1)");
-const nextButton = document.querySelector(".button2:nth-child(2)");
+const backButton = document.querySelector(".button2");
+const nextButton = document.querySelector(".button1");
 
 let currentPage = 1;
+const cardsPerPage = 8; 
 
 async function getPokemon(page) {
-  // Fazendo uma requisição para a PokeAPI para obter dados de Pokémon da página especificada
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`
-  );
 
-  // Convertendo a resposta para JSON
+  const startIndex = (page - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+
+  
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${cardsPerPage}&offset=${startIndex}`);
+
+
   const data = await response.json();
 
-  // Chamando a função para criar os cards
+
   createPokemonCards(data.results);
 }
 
-function createPokemonCards(pokemonArray) {
-  // Removendo os cards anteriores
-  main2.innerHTML = "";
+async function createPokemonCards(pokemonArray) {
 
-  // Iterando sobre o array de Pokémon
-  pokemonArray.forEach(async (pokemon) => {
-    // Fazendo uma nova requisição para obter dados detalhados do Pokémon
+  main.innerHTML = "";
+
+
+  for (const pokemon of pokemonArray) {
+    
     const response = await fetch(pokemon.url);
     const pokemonData = await response.json();
 
-    // Obtendo a URL da imagem animada do Pokémon
-    const animatedImageUrl =
-      pokemonData.sprites.versions["generation-v"]["black-white"].animated
-        .front_default;
+    const animatedImageUrl = getAnimatedImageUrl(pokemonData);
 
-    // Criando o card HTML para o Pokémon
+    
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -110,9 +53,24 @@ function createPokemonCards(pokemonArray) {
         </div>
       </div>
     `;
-    // Adicionando o card ao elemento principal
-    main2.appendChild(card);
-  });
+  
+    main.appendChild(card);
+  }
+}
+
+function getAnimatedImageUrl(pokemonData) {
+
+  if (pokemonData.sprites.versions["generation-v"]) {
+    return pokemonData.sprites.versions["generation-v"]["black-white"].animated.front_default;
+  } else if (pokemonData.sprites.versions["generation-vi"]) {
+    return pokemonData.sprites.versions["generation-vi"]["omegaruby-alphasapphire"].animated.front_default;
+  } else if (pokemonData.sprites.versions["generation-vii"]) {
+    return pokemonData.sprites.versions["generation-vii"]["icons"].front_default;
+  } else if (pokemonData.sprites.versions["generation-viii"]) {
+    return pokemonData.sprites.versions["generation-viii"]["icons"].front_default;
+  } else {
+    return pokemonData.sprites.front_default;
+  }
 }
 
 // Event listeners para os botões de navegação
@@ -130,4 +88,3 @@ nextButton.addEventListener("click", () => {
 
 // Chamando a função principal para buscar e exibir os Pokémon da primeira página
 getPokemon(currentPage);
-
